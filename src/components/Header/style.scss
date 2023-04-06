@@ -1,0 +1,24 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  gap: 96px;
+  height: 117px;
+  box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.25);
+
+  &__picture {
+    height: 70px;
+    width: 88px;
+    margin: 22px 0 25px 44px;
+    border-radius: 0px;
+  }
+
+  &__title {
+    height: 55px;
+    width: 560px;
+    font-family: Roboto;
+    font-size: 36px;
+    font-weight: 300;
+    line-height: 42px;
+    text-align: left;
+  }
+}

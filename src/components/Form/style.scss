@@ -1,0 +1,25 @@
+.form {
+  height: 453px;
+  width: 400.5px;
+  padding: 0 37px 10px;
+  border-radius: 4px;
+  background-color: white;
+  box-sizing: border-box;
+
+  .formContent {
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+
+    &__title {
+      margin-left: 30px;
+      align-self: start;
+      width: 212px;
+      height: 30px;
+      font-family: 'Roboto';
+      font-weight: 300;
+      font-size: 36px;
+      color: #000000;
+    }
+  }
+}
