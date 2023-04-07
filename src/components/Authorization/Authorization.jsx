@@ -5,11 +5,9 @@ import { bigLogo } from "../../img";
 import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
 import { Context } from "../..";
-import "./style.scss"
-import { regExpPassword } from "../../constants";
+import "./style.scss";
 
-
-const Registration = () => {
+const Authorization = () => {
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [isSnackbarShow, setSnackbarShow] = useState(false);
   const [userInfo, setUserInfo] = useState({
@@ -20,28 +18,21 @@ const Registration = () => {
 
   const store = useContext(Context);
 
-  const registrateUser = async () => {
+  const authorizateUser = async () => {
     const login = userInfo.login.trim();
     const password = userInfo.password.trim();
 
-    if (login.length < 6) {
-      showSnackbar("Логин должен содержать не менее 6 символов");
+    if (!login) {
+      showSnackbar("Заполните логин!");
       return
     }
 
-    if (!regExpPassword.test(password)) {
-      showSnackbar("Пароль должен содержать не менее 6 латинских символов, где хотя бы один является цифрой");
+    if (!password) {
+      showSnackbar("Заполните пароль!");
       return
     }
 
-    if (password !== userInfo.repeatedPassword) {
-      showSnackbar("Пароли не совпадают");
-      return
-    }
-
-
-
-    const { error } = await store.registration(login, password);
+    const { error } = await store.authorization(login, password);
 
     if (error) {
       showSnackbar(error);
@@ -68,16 +59,16 @@ const Registration = () => {
         openSnackBar={isSnackbarShow}
         closeSnackBar={() => setSnackbarShow(false)}
       />
-      <Header title="Зарегистрироваться в системе" />
-      <div className="registration">
+      <Header title="Войти в систему" />
+      <div className="authorization">
         <img
           src={bigLogo}
           alt="logo"
-          className="registration__building"
+          className="authorization__building"
         />
         <Form title="Регистрация">
           <label
-            className="registration__label"
+            className="authorization__label"
             htmlFor="loginInput"
           >
             Логин:
@@ -87,12 +78,12 @@ const Registration = () => {
             type="text"
             value={userInfo.login}
             placeholder="Логин"
-            className="registration__input"
+            className="authorization__input"
             onChange={(event) => handleChange(event.target.value, "login")}
           />
 
           <label
-            className="registration__label"
+            className="authorization__label"
             htmlFor="passwordInput"
           >
             Пароль:
@@ -102,36 +93,22 @@ const Registration = () => {
             type="password"
             value={userInfo.password}
             placeholder="Пароль"
-            className="registration__input"
+            className="authorization__input"
             onChange={(event) => handleChange(event.target.value, "password")}
           />
-          <label
-            className="registration__label"
-            htmlFor="repeatedPasswordInput"
-          >
-            Повторите пароль:
-          </label>
-          <input
-            id="repeatedPasswordInput"
-            type="password"
-            value={userInfo.repeatedPassword}
-            placeholder="Пароль"
-            className="registration__input"
-            onChange={(event) => handleChange(event.target.value, "repeatedPassword")}
-          />
-          <div className="registrationButtons">
+          <div className="authorizationButtons">
             <button
               type="button"
-              className="registrationButtons__button"
-              onClick={registrateUser}
+              className="authorizationButtons__button"
+              onClick={authorizateUser}
             >
-              Зарегистрироваться
+              Войти
             </button>
             <Link
-              to="/authorization"
-              className="registrationButtons__link"
+              to="/registration"
+              className="authorizationButtons__link"
             >
-              Авторизация
+              Зарегистрироваться
             </Link>
           </div>
 
@@ -141,4 +118,4 @@ const Registration = () => {
   )
 }
 
-export default Registration;
+export default Authorization;

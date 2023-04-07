@@ -1,7 +1,10 @@
 import { event } from "../constants";
 import {
-  registrationService
-} from "../services/authService"
+  registrationService,
+  authorizationService,
+  logoutService,
+  refreshService
+} from "../services/authservice"
 
 class Store {
   user = {};
@@ -12,6 +15,7 @@ class Store {
     this.isAuth = boolean;
     this.publish(event[0], this.isAuth)
   }
+
 
   setUser(userData) {
     this.user = userData;
@@ -46,7 +50,7 @@ class Store {
 
       return {
         error: null,
-        data: null
+        data: response.data
       }
     } catch (error) {
       const err = error.response?.data?.message
@@ -58,6 +62,115 @@ class Store {
       }
     }
   }
+
+  authorization = async (login, password) => {
+    try {
+      const response = await authorizationService(login, password);
+
+      localStorage.setItem("token", response.data.accessToken);
+
+      this.setAuth(true);
+      this.setUser(response.data.user);
+
+      return {
+        error: null,
+        data: response.data
+      }
+    } catch (error) {
+      const err = error.response?.data?.message
+        ?? "Ошибка на сервере при авторизации";
+
+      return {
+        error: err,
+        data: null
+      }
+    }
+  }
+
+  logout = async () => {
+    try {
+      console.log("store logout");
+      await logoutService();
+
+      localStorage.removeItem("token");
+
+      this.setAuth(false);
+      this.setUser({});
+
+      return {
+        error: null,
+        data: null
+      }
+    } catch (error) {
+      const err = error.response?.data?.message
+        ?? "Не удалось выйти, ошибка на сервере";
+
+      return {
+        error: err,
+        data: null
+      }
+    }
+  }
+
+  // checkAuth = async () => {
+  //   try {
+  //     console.log(1);
+  //     if (!localStorage.getItem("token")) {
+  //       this.setAuth(false);
+  //       this.setUser({});
+
+  //       return;
+  //     }
+  //     this.setAuth(true);
+  //     const response = await refreshService();
+  //     console.log(2);
+
+  //     localStorage.setItem("token", response.data.accessToken);
+
+      
+  //     this.setUser(response.data.user);
+
+  //     return {
+  //       error: null,
+  //       data: null
+  //     }
+  //   } catch (error) {
+  //     const err = error.response?.data?.message
+  //       ?? "Не удалось выйти, ошибка на сервере";
+  //     console.log(error)
+
+  //     return {
+  //       error: err,
+  //       data: null
+  //     }
+  //   }
+  // }
+
+  checkAuth = async () => {
+    try {
+      if (!localStorage.getItem("token")) {
+        this.setAuth(false);
+        this.setUser({});
+        return;
+      }
+      const response = await refreshService();
+      localStorage.setItem("token", response.data.accessToken);
+      this.setAuth(true);
+      this.setUser(response.data.user);
+      return {
+        error: null,
+        data: null
+      }
+    } catch (error) {
+      const err = error.response?.data?.message
+        ?? "Ошибка! Не удалось проверить авторизован ли пользователь в системе";
+      return {
+        error: err,
+        data: null
+      }
+    }
+  }
+
 }
 
 export default Store;
