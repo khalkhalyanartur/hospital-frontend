@@ -1,12 +1,12 @@
-import Header from "../Header/Header";
-import Form from "../Form/Form";
-import Snackbar from "../UI/Snackbar/Snackbar";
-import { bigLogo } from "../../img";
-import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
-import { Context } from "../..";
-import "./style.scss"
+import { Link } from "react-router-dom";
+import { Context } from "src";
 import { regExpPassword } from "../../constants";
+import { bigLogo } from "src/img";
+import Header from "src/components/Header/Header";
+import Form from "src/components/Form/Form";
+import Snackbar from "src/components/UI/Snackbar/Snackbar";
+import "./style.scss"
 
 const Registration = () => {
   const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -37,8 +37,6 @@ const Registration = () => {
       showSnackbar("Пароли не совпадают");
       return
     }
-
-
 
     const { error } = await store.registration(login, password);
 
@@ -72,7 +70,6 @@ const Registration = () => {
         <img
           src={bigLogo}
           alt="logo"
-          className="registration__building"
         />
         <Form title="Регистрация">
           <label
@@ -89,7 +86,6 @@ const Registration = () => {
             className="registration__input"
             onChange={(event) => handleChange(event.target.value, "login")}
           />
-
           <label
             className="registration__label"
             htmlFor="passwordInput"
@@ -133,7 +129,6 @@ const Registration = () => {
               Авторизация
             </Link>
           </div>
-
         </Form>
       </div>
     </div>

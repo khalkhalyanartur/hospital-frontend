@@ -1,8 +1,8 @@
-import { Routes, Route, Navigate } from "react-router-dom";
-import Registration from "./components/Registration/Registration"
 import { useContext, useEffect, useState } from "react";
-import { event } from "./constants"
-import { Context } from "./index"
+import { Routes, Route, Navigate } from "react-router-dom";
+import { Context } from "src"
+import Registration from "src/components/Registration/Registration"
+import { event } from "src/constants"
 
 
 

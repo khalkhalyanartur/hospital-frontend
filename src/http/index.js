@@ -1,6 +1,5 @@
 import axios from "axios";
-import { url } from "../constants";
-import { withEmotionCache } from "@emotion/react";
+import { url } from "src/constants";
 
 const $api = axios.create({
   baseURL: url,

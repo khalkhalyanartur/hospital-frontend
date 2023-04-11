@@ -1,7 +1,7 @@
-import { event } from "../constants";
+import { event } from "src/constants";
 import {
   registrationService
-} from "../services/authService"
+} from "src/services/authservice"
 
 class Store {
   user = {};
@@ -40,13 +40,12 @@ class Store {
       const response = await registrationService(login, password);
 
       localStorage.setItem("token", response.data.accessToken);
-
       this.setAuth(true);
       this.setUser(response.data.user);
 
       return {
         error: null,
-        data: null
+        data: response.data
       }
     } catch (error) {
       const err = error.response?.data?.message
