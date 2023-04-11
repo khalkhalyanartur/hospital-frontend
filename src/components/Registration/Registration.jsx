@@ -1,12 +1,12 @@
-import Header from "../Header/Header";
-import Form from "../Form/Form";
-import Snackbar from "../UI/Snackbar/Snackbar";
-import { bigLogo } from "../../img";
+import Header from "src/components/Header/Header";
+import Form from "src/components/UI/Form/Form";
+import Snackbar from "src/components/UI/Snackbar/Snackbar";
+import { bigLogo } from "src/img";
 import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
-import { Context } from "../..";
+import { Context } from "src";
 import "./style.scss"
-import { regExpPassword } from "../../constants";
+import { regExpPassword } from "src/constants";
 
 
 const Registration = () => {

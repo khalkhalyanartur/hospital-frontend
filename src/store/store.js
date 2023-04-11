@@ -6,6 +6,10 @@ import {
   refreshService
 } from "../services/authservice"
 
+import {
+  getReceptions
+} from "../services/apointentservice"
+
 class Store {
   user = {};
   isAuth = false;
@@ -112,39 +116,7 @@ class Store {
     }
   }
 
-  // checkAuth = async () => {
-  //   try {
-  //     console.log(1);
-  //     if (!localStorage.getItem("token")) {
-  //       this.setAuth(false);
-  //       this.setUser({});
 
-  //       return;
-  //     }
-  //     this.setAuth(true);
-  //     const response = await refreshService();
-  //     console.log(2);
-
-  //     localStorage.setItem("token", response.data.accessToken);
-
-      
-  //     this.setUser(response.data.user);
-
-  //     return {
-  //       error: null,
-  //       data: null
-  //     }
-  //   } catch (error) {
-  //     const err = error.response?.data?.message
-  //       ?? "Не удалось выйти, ошибка на сервере";
-  //     console.log(error)
-
-  //     return {
-  //       error: err,
-  //       data: null
-  //     }
-  //   }
-  // }
 
   checkAuth = async () => {
     try {
@@ -164,6 +136,24 @@ class Store {
     } catch (error) {
       const err = error.response?.data?.message
         ?? "Ошибка! Не удалось проверить авторизован ли пользователь в системе";
+      return {
+        error: err,
+        data: null
+      }
+    }
+  }
+
+  showAllAppointments = async () => {
+    try {
+      const response = await getReceptions();
+
+      return {
+        error: null,
+        data: response.data
+      }
+    } catch (error) {
+      const err = error.response?.data?.message
+        ?? "Ошибка! Не удалось получить записи с сервера";
       return {
         error: err,
         data: null
