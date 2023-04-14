@@ -1,5 +1,5 @@
 import axios from "axios";
-import { url } from "../constants";
+import { url } from "src/constants";
 import {
   refreshService
 } from "../services/authservice"

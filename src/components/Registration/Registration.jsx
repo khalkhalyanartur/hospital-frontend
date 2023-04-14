@@ -39,8 +39,6 @@ const Registration = () => {
       return
     }
 
-
-
     const { error } = await store.registration(login, password);
 
     if (error) {
@@ -73,7 +71,6 @@ const Registration = () => {
         <img
           src={bigLogo}
           alt="logo"
-          className="registration__building"
         />
         <Form title="Регистрация">
           <label
@@ -90,7 +87,6 @@ const Registration = () => {
             className="registration__input"
             onChange={(event) => handleChange(event.target.value, "login")}
           />
-
           <label
             className="registration__label"
             htmlFor="passwordInput"
@@ -134,7 +130,6 @@ const Registration = () => {
               Авторизация
             </Link>
           </div>
-
         </Form>
       </div>
     </div>

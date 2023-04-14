@@ -1,4 +1,4 @@
-import { event } from "../constants";
+import { event } from "src/constants";
 import {
   registrationService,
   authorizationService,
@@ -50,7 +50,6 @@ class Store {
       const response = await registrationService(login, password);
 
       localStorage.setItem("token", response.data.accessToken);
-
       this.setAuth(true);
       this.setUser(response.data.user);
 

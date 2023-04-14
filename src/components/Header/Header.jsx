@@ -1,8 +1,7 @@
-import "./style.scss"
-import { smallLogo } from "../../img";
+import { smallLogo } from "src/img";
 import "./style.scss";
 
-const Header = (props) => {
+const Header = ({ title }) => {
   return (
     <div className="header">
       <div className="header-content">

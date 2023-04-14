@@ -1,3 +1,4 @@
+import { useContext, useEffect, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Registration from "./components/Registration/Registration"
 import Reception from "./components/Reception/Reception"

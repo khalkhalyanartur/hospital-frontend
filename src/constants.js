@@ -1,6 +1,6 @@
-const url = 'http://localhost:5000';
+const url = "http://localhost:5000";
 const regExpPassword = (/(?=.*\d)[a-zA-Z0-9]{6,}/);
-const event = ["login"];
+const event = ["entered"];
 
 const textAppointments = [
   {

@@ -1,12 +1,11 @@
 import "./style.scss"
 
-const Form = (props) => {
+const Form = ({ title, children }) => {
   return (
-
     <div className="form">
       <div className="formContent">
-        <p className="formContent__title">{props.title}</p>
-        {props.children}
+        <p className="formContent__title">{title}</p>
+        {children}
       </div>
     </div>
   )
