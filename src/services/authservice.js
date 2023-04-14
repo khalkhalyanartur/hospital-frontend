@@ -9,7 +9,6 @@ const authorizationService = (login, password) => {
 }
 
 const logoutService = () => {
-  console.log("logout")
   return api.get("users/logout");
 }
 

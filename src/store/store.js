@@ -6,6 +6,12 @@ import {
   refreshService
 } from "../services/authservice"
 
+import {
+  getReceptions,
+  addAppointmentService,
+  deleteAppointmentService
+} from "../services/apointentservice"
+
 class Store {
   user = {};
   isAuth = false;
@@ -112,39 +118,7 @@ class Store {
     }
   }
 
-  // checkAuth = async () => {
-  //   try {
-  //     console.log(1);
-  //     if (!localStorage.getItem("token")) {
-  //       this.setAuth(false);
-  //       this.setUser({});
 
-  //       return;
-  //     }
-  //     this.setAuth(true);
-  //     const response = await refreshService();
-  //     console.log(2);
-
-  //     localStorage.setItem("token", response.data.accessToken);
-
-      
-  //     this.setUser(response.data.user);
-
-  //     return {
-  //       error: null,
-  //       data: null
-  //     }
-  //   } catch (error) {
-  //     const err = error.response?.data?.message
-  //       ?? "Не удалось выйти, ошибка на сервере";
-  //     console.log(error)
-
-  //     return {
-  //       error: err,
-  //       data: null
-  //     }
-  //   }
-  // }
 
   checkAuth = async () => {
     try {
@@ -169,6 +143,61 @@ class Store {
         data: null
       }
     }
+  }
+
+  showAllAppointments = async () => {
+    try {
+      const response = await getReceptions();
+
+      return {
+        error: null,
+        data: response.data
+      }
+    } catch (error) {
+      const err = error.response?.data?.message
+        ?? "Ошибка! Не удалось получить записи с сервера";
+      return {
+        error: err,
+        data: null
+      }
+    }
+  }
+
+  createAppointments = async (appointmentInfo) => {
+    try {
+      const response = await addAppointmentService(appointmentInfo);
+
+      return {
+        error: null,
+        data: response.data
+      }
+    } catch (error) {
+      const err = error.response?.data?.message
+        ?? "Ошибка! Не удалось отправить запись на сервер";
+      return {
+        error: err,
+        data: null
+      }
+    }
+  }
+
+  deleteAppointment = async (id) => {
+    try {
+      const response = await deleteAppointmentService(id);
+
+      return {
+        error: null,
+        data: response.data
+      }
+    } catch (error) {
+      const err = error.response?.data?.message
+        ?? "Ошибка! Не удалось удалить запись на сервер";
+      return {
+        error: err,
+        data: null
+      }
+    }
+
   }
 
 }
