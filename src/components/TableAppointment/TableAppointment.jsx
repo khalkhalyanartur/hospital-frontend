@@ -1,7 +1,7 @@
-import { textAppointments } from "src/constants"
 import moment from "moment";
 import { edit } from "src/img";
 import { del } from "src/img";
+import { textAppointments } from "src/constants"
 import "./style.scss";
 
 
@@ -30,14 +30,14 @@ const TableAppointment = ({ appointments, delAppointment }) => {
                 //onClick={() => delAppointment(data._id)}
                 className="btn_icon"
               >
-                <img src={edit} atl="edit" />
+                <img src={edit} alt="edit" />
               </button>
 
               <button
                 className="btn_icon"
                 onClick={() => delAppointment(data._id)}
               >
-                <img src={del} atl="delete" />
+                <img src={del} alt="delete" />
               </button>
             </td>
 

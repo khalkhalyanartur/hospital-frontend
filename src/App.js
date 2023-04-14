@@ -1,11 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import Registration from "./components/Registration/Registration"
-import Reception from "./components/Reception/Reception"
-import { useContext, useEffect, useState } from "react";
+import { Context } from "src";
+import Registration from "src/components/Registration/Registration";
+import Reception from "src/components/Reception/Reception";
+import Authorization from "src/components/Authorization/Authorization";
 import { event } from "./constants";
-import { Context } from "./index";
-import Authorization from "./components/Authorization/Authorization";
 
 const App = () => {
   const store = useContext(Context);

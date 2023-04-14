@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
-import { Context } from "../..";
-import Header from "../Header/Header";
+import { Context } from "src";
+import Header from "src/components/Header/Header";
 import AddAppointments from "src/components/AddAppointment/Addappointment";
 import TableAppointment from "src/components/TableAppointment/TableAppointment";
 
