@@ -1,5 +1,5 @@
 import axios from "axios";
-import { url } from "../constants";
+import { url } from "src/constants";
 import {
   refreshService
 } from "../services/authservice"
@@ -8,10 +8,6 @@ const api = axios.create({
   baseURL: url,
   withCredentials: true
 })
-
-
-let flag = false;
-
 
 api.interceptors.response.use((config) => {
 
@@ -23,8 +19,6 @@ api.interceptors.response.use((config) => {
     return error;
   }
 
-  console.log("originalRequest._isRetry=",originalRequest._isRetry);
-
   if (error.response.status === 401 && originalRequest && !originalRequest._isRetry ) {
     originalRequest._isRetry = true;
     console.log(error.config);
@@ -33,13 +27,10 @@ api.interceptors.response.use((config) => {
       localStorage.setItem("token", response.data.accessToken);
       return api.request(originalRequest);
     } catch (error) {
-      console.log("1", error)
       return
     }
   }
-  console.log("2", error)
   throw error;
-
 })
 
 
