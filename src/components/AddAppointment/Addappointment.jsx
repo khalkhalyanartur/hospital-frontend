@@ -1,6 +1,46 @@
+import { useState } from "react";
+import { doctors } from "src/constants";
 import "./style.scss";
 
-const AddAppointments = () => {
+const AddAppointments = ({addNewAppointmentReception}) => {
+  const [appointmentInfo, setAppointmentInfo] = useState({
+    patient: '',
+    doctor: '',
+    date: '',
+    complaint: ''
+  })
+
+  const handleChange = (value, key) => {
+    setAppointmentInfo({
+      ...appointmentInfo,
+      [key]: value
+    })
+  }
+
+  const addNewAppointment = () => {
+
+    if (!appointmentInfo.patient.trim()) {
+      console.log("Пациент пуст!");
+      return
+    }
+    if (!appointmentInfo.doctor.trim()) {
+      console.log("Доктор пуст!");
+      return
+    }
+    if (!appointmentInfo.date.trim()) {
+      console.log("Дата пуста!");
+      return
+    }
+    if (!appointmentInfo.complaint.trim()) {
+      console.log("Жалобы пусты!");
+      return
+    }
+
+    addNewAppointmentReception(appointmentInfo);
+  }
+
+
+
   return (
     <div className="reception-input">
       <div className="input-block">
@@ -9,23 +49,23 @@ const AddAppointments = () => {
         </label>
         <input
           className="input-block__input"
-          id="loginInput"
           type="text"
-        // value={userInfo.login}
-        //onChange={(event) => handleChange(event.target.value, "login")}
+          value={appointmentInfo.patient}
+          onChange={(event) => handleChange(event.target.value, "patient")}
         />
       </div>
       <div className="input-block">
         <label>
           Врач:
         </label>
-        <input
+        <select
           className="input-block__input"
-          id="loginInput"
-          type="text"
-        // value={userInfo.login}
-        //onChange={(event) => handleChange(event.target.value, "login")}
-        />
+          value={appointmentInfo.doctor}
+          onChange={(event) => handleChange(event.target.value, "doctor")}
+        >
+          <option hidden value="" />
+          {doctors.map((doctor) => <option key={doctor}>{doctor}</option>)}
+        </select>
       </div>
       <div className="input-block">
         <label>
@@ -35,8 +75,8 @@ const AddAppointments = () => {
           className="input-block__input"
           id="loginInput"
           type="date"
-        // value={userInfo.login}
-        //onChange={(event) => handleChange(event.target.value, "login")}
+          value={appointmentInfo.date}
+          onChange={(event) => handleChange(event.target.value, "date")}
         />
       </div>
       <div className="input-block">
@@ -47,12 +87,12 @@ const AddAppointments = () => {
           className="input-block__input"
           id="loginInput"
           type="text"
-        // value={userInfo.login}
-        //onChange={(event) => handleChange(event.target.value, "login")}
+          value={appointmentInfo.complaint}
+          onChange={(event) => handleChange(event.target.value, "complaint")}
         />
       </div>
       <div className="input-block">
-        <button className="reception-input__button">Добавить</button>
+        <button onClick={addNewAppointment} className="reception-input__button">Добавить</button>
       </div>
 
     </div>

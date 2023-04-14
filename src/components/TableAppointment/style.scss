@@ -13,20 +13,37 @@
       border-bottom: 1px solid black;
       height: 60px;
 
-      th {
-        width: 400px;
+      .th {
+        width: 300px;
+
+        &:last-child {
+          width: 100px;
+        }
       }
     }
 
   }
 
   &__element {
-    width: 400px;
+    width: 300px;
     //padding: 25px 0 15px 0;
     border-collapse: separate;
     font-size: 18px;
     font-weight: 300;
-    background-color: burlywood;
+    background-color: white;
     border-right: 2px solid black;
+    text-align: center;
   }
+
+  &__btn {
+    width: 50px;
+    text-align: center;
+    background-color: white;
+  }
+
+}
+
+.btn_icon {
+  background-color: rgba($color: #000000, $alpha: 0);
+  border: 0px;
 }

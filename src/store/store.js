@@ -7,7 +7,9 @@ import {
 } from "../services/authservice"
 
 import {
-  getReceptions
+  getReceptions,
+  addAppointmentService,
+  deleteAppointmentService
 } from "../services/apointentservice"
 
 class Store {
@@ -159,6 +161,43 @@ class Store {
         data: null
       }
     }
+  }
+
+  createAppointments = async (appointmentInfo) => {
+    try {
+      const response = await addAppointmentService(appointmentInfo);
+
+      return {
+        error: null,
+        data: response.data
+      }
+    } catch (error) {
+      const err = error.response?.data?.message
+        ?? "Ошибка! Не удалось отправить запись на сервер";
+      return {
+        error: err,
+        data: null
+      }
+    }
+  }
+
+  deleteAppointment = async (id) => {
+    try {
+      const response = await deleteAppointmentService(id);
+
+      return {
+        error: null,
+        data: response.data
+      }
+    } catch (error) {
+      const err = error.response?.data?.message
+        ?? "Ошибка! Не удалось удалить запись на сервер";
+      return {
+        error: err,
+        data: null
+      }
+    }
+
   }
 
 }
